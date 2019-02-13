@@ -7,6 +7,14 @@ from urllib.parse import urlparse, parse_qs
 
 class handler(BaseHTTPRequestHandler):
 
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
+        self.send_header('Access-Control-Allow-Credentials', 'true')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.end_headers()
+        self.wfile.write("\n")
+
     def do_GET(self):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
